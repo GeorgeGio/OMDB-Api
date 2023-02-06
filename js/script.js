@@ -9,12 +9,61 @@ let moviePosterEl = document.querySelector("#movie-poster");
 let movieSearchButtonEl = document.querySelector("#movie-search-button");
 
 
+//EventListener for MovieSearchButton
+
+movieSearchButtonEl.addEventListener("click", function () {
+  userMovie = movieSearchEl.value.trim();
+
+  console.log("userMovie", userMovie);
+
+ 
+  getUserMovie(userMovie);
 
 
-fetch("http://www.omdbapi.com/?i=tt3896198&apikey=b8054373")
-    .then(response => response.json())
-    .then(data => console.log(data));
+  getSimilarMovies(userMovie);
 
-fetch("https://tastedive.com/api/similar?q=movie:matrix&k=447474-Project1-74HRK333")
-.then(response => response.json())
-.then(data => console.log(data))
+
+  
+});
+
+
+function displayUserMoviePoster(){
+  moviePosterEl.src = userMoviePosterUrl;
+
+
+}
+
+
+
+function getUserMovie(movie) {
+  fetch(`http://www.omdbapi.com/?t=${movie}&apikey=b8054373`)
+    .then((response) => response.json())
+    //   .then(data => console.log(data));
+    .then((data) => {
+      //could condense these 2 lines into 1
+      userMoviePosterUrl = data.Poster;
+
+      displayUserMoviePoster();
+
+      
+    });
+}
+
+function getSimilarMovies(movie){
+  
+
+
+
+ // fetch("https://tastedive.com/api/similar?q=movie:matrix&k=447474-Project1-74HRK333")
+ fetch("https://tastedive.com/api/similar?q=movie:matrix&k=447625-Project1-NTMYY5L9")
+  .then(response => response.json())
+  .then(data => console.log(data))
+  
+  for (let index = 0; index < similarMoviesToShow; index++) {
+    similarMoviesArr[index] = ["movie"+index, "url"+index];
+    
+  }
+  
+  
+
+}

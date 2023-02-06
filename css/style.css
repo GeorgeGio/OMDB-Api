@@ -1,0 +1,10 @@
+#movie-poster{
+
+    height: 100px;
+    width:100px;    
+}
+
+#similar-movies-section{
+    display: flex;
+    height: 100px;
+}
