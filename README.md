@@ -98,7 +98,7 @@ Use this section to outline areas that you want to continue focusing on in futur
 - GitHub - [GeorgeGio](https://github.com/GeorgeGio)
 
   Manolis
-- GitHub - [your GitHub username](https://github.com/yourusername)
+- GitHub - [manolisgi](https://github.com/manolisgi)
 
   Ian Logendra
 - GitHub - [EDX-IL](https://github.com/EDX-IL)

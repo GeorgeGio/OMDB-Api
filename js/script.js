@@ -2,6 +2,9 @@ let userMovie = "";
 let userMoviePosterUrl = "";
 let similarMoviesArr = [];
 let similarMoviesToShow = 3;
+let similarMovie1 = document.querySelector("#similarMovie1");
+let similarMovie2 = document.querySelector("#similarMovie2");
+let similarMovie3 = document.querySelector("#similarMovie3")
 
 let movieSearchEl = document.querySelector("#movie-search");
 let moviePosterEl = document.querySelector("#movie-poster");
@@ -69,6 +72,9 @@ function getSimilarMovies(movie){
   
   })
   
+  
+
+}
   
 
 }
