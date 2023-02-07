@@ -13,7 +13,8 @@
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
+**Note: This project makes use of CORS Unblock Extension**
+Here is a link for one on Chrome:[Cors Unblock](https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino?hl=en)
 
 ## Overview
 

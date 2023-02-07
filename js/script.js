@@ -12,6 +12,8 @@ let moviePosterEl = document.querySelector("#movie-poster");
 let movieSearchButtonEl = document.querySelector("#movie-search-button");
 
 
+
+
 //EventListener for MovieSearchButton
 
 movieSearchButtonEl.addEventListener("click", function () {
@@ -20,54 +22,59 @@ movieSearchButtonEl.addEventListener("click", function () {
   console.log("userMovie", userMovie);
 
  
-  getUserMovie(userMovie);
+  displayMoviePoster(userMovie);
 
 
-  getSimilarMovies();
+  getSimilarMovies(userMovie);
 
 
   
 });
 
 
-function displayUserMoviePoster(){
-  moviePosterEl.src = userMoviePosterUrl;
 
-
-}
-
-
-
-function getUserMovie(movie) {
-  fetch(`http://www.omdbapi.com/?t=${movie}&apikey=b8054373`)
+function displayMoviePoster(movie) {
+  fetch(`https://www.omdbapi.com/?t=${movie}&apikey=b8054373`)
     .then((response) => response.json())
     //   .then(data => console.log(data));
     .then((data) => {
       //could condense these 2 lines into 1
       userMoviePosterUrl = data.Poster;
 
-      displayUserMoviePoster();
+      moviePosterEl.src = userMoviePosterUrl;
 
-      
+      let similarButton = document.body.appendChild(document.createElement("button"));
+      similarButton.textContent = "Similar movies";
+
+      // getSimilarMovies(movie);
     });
 }
 
-function getSimilarMovies(){
+function getSimilarMovies(movie){
   
 
 
 
  // fetch("https://tastedive.com/api/similar?q=movie:matrix&k=447474-Project1-74HRK333")
- fetch("https://tastedive.com/api/similar?q=movie:matrix&k=447625-Project1-NTMYY5L9&limit=3")
+ fetch("https://tastedive.com/api/similar?q=movie:"+ movie +"&k=447625-Project1-NTMYY5L9&limit=3")
   .then(response => response.json())
-  .then(data => console.log(data))
-  
-  
-  // for (let index = 0; index < similarMoviesToShow; index++) {
-  //   similarMoviesArr[index] = ["movie"+index, "url"+index];
+  // .then(similarMovies => console.log(similarMovies))
+  .then((similarMovies) => {
     
-  // }
+    for (let index = 0; index < 3; index++) {
+      let movieIndex = similarMovies.Similar.Results[index].Name;
+      similarMoviesArr.push(movieIndex);
+      
+      
+    }
+    localStorage.setItem("SimilarMovies", similarMoviesArr);
+    
   
+  })
+  
+  
+
+}
   
 
 }
