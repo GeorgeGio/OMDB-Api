@@ -76,14 +76,14 @@ function getSimilarMovies(movie) {
     .then(response => response.json())
     // .then(similarMovies => console.log(similarMovies))
     .then((similarMovies) => {
-      let localArray = [];
+      similarMoviesArr = [];
       for (let index = 0; index < 3; index++) {
-        let movieIndex = similarMovies.Similar.Results[index].Name;
-        localArray.push(movieIndex);
+        let similarMovieName = similarMovies.Similar.Results[index].Name;
+        similarMoviesArr.push();
 
 
       }
-      localStorage.setItem("SimilarMovies",JSON.stringify(localArray));
+      localStorage.setItem("SimilarMovies",JSON.stringify(similarMoviesArr));
 
 
     })
