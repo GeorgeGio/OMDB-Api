@@ -20,7 +20,7 @@ movieSearchButtonEl.addEventListener("click", function () {
   getUserMovie(userMovie);
 
 
-  getSimilarMovies(userMovie);
+  getSimilarMovies();
 
 
   
@@ -49,20 +49,20 @@ function getUserMovie(movie) {
     });
 }
 
-function getSimilarMovies(movie){
+function getSimilarMovies(){
   
 
 
 
  // fetch("https://tastedive.com/api/similar?q=movie:matrix&k=447474-Project1-74HRK333")
- fetch("https://tastedive.com/api/similar?q=movie:matrix&k=447625-Project1-NTMYY5L9")
+ fetch("https://tastedive.com/api/similar?q=movie:matrix&k=447625-Project1-NTMYY5L9&limit=3")
   .then(response => response.json())
   .then(data => console.log(data))
   
-  for (let index = 0; index < similarMoviesToShow; index++) {
-    similarMoviesArr[index] = ["movie"+index, "url"+index];
+  // for (let index = 0; index < similarMoviesToShow; index++) {
+  //   similarMoviesArr[index] = ["movie"+index, "url"+index];
     
-  }
+  // }
   
   
 
