@@ -21,9 +21,9 @@ movieSearchButtonEl.addEventListener("click", function () {
 
   displayMoviePoster(userMovie);
 
-  getSimilarMovies(userMovie);
+ // getSimilarMovies(userMovie);
 
-  DisplaySimilarMoviePosters();
+//  DisplaySimilarMoviePosters();
 });
 
 function displayMoviePoster(movie) {
@@ -33,6 +33,7 @@ function displayMoviePoster(movie) {
       userMoviePosterUrl = data.Poster;
 
       moviePosterEl.src = userMoviePosterUrl;
+
     });
 }
 
@@ -50,12 +51,15 @@ function getSimilarMovies(movie) {
         localStorage.setItem(index, similarMovieName);
       }
     });
+
 }
 
 function DisplaySimilarMoviePosters() {
   //loop through local storage and call DisplaySimiarMoviePosters
   for (let index = 0; index < localStorage.length; index++) {
+
     console.log("localStorage:", index, " ", localStorage[index]);
+
     //this parts depends on whether you want to create images dynamically or use IDs in the HTML - but that depends on the content framework you want to use
   }
 }
