@@ -21,9 +21,9 @@ movieSearchButtonEl.addEventListener("click", function () {
 
   displayMoviePoster(userMovie);
 
-  getSimilarMovies(userMovie);
+ // getSimilarMovies(userMovie);
 
-  DisplaySimilarMoviePosters();
+//  DisplaySimilarMoviePosters();
 });
 
 function displayMoviePoster(movie) {
@@ -36,48 +36,34 @@ function displayMoviePoster(movie) {
 
       moviePosterEl.src = userMoviePosterUrl;
 
-      // let similarButton = document.body.appendChild(document.createElement("button"));
-      // console.log(similarButton);
-      // similarButton.textContent = "Similar movies";
-      // similarButton.setAttribute("class" , "simButMov");
-      // let buttonClass = document.querySelector(".simButMov");
-
-      // buttonClass.addEventListener("click",function(){
-      //   console.log("works");
-      //   let similarMoviesString = localStorage.getItem("SimilarMovies");
-
-      // console.log(similarMoviesArr);
-      // similarMoviesArr = JSON.parse(similarMoviesString) || [];
-      // console.log(similarMoviesArr);
-
-      // });
-
-      // getSimilarMovies(movie);
-    });
-}
-
-function getSimilarMovies(movie) {
-  fetch(
-    "https://tastedive.com/api/similar?q=movie:" +
+      localStorage.clear();
+    }).then (()=>(getSimilarMovies(movie)))
+  }
+  
+  function getSimilarMovies(movie) {
+    fetch(
+      "https://tastedive.com/api/similar?q=movie:" +
       movie +
       "&k=447625-Project1-NTMYY5L9&limit=3"
-  )
-    .then((response) => response.json())
-    .then((similarMovies) => {
-     
-      localStorage.clear();
-      for (let index = 0; index < 3; index++) {
-        let similarMovieName = similarMovies.Similar.Results[index].Name;
-        localStorage.setItem(index, similarMovieName);
-      }
-    });
+      )
+      .then((response) => response.json())
+      .then((similarMovies) => {
+        console.log(similarMovies);
+        
+        
+        for (let index = 0; index < 3; index++) {
+          let similarMovieName = similarMovies.Similar.Results[index].Name;
+          localStorage.setItem(index, similarMovieName);
+        }
+      })
+      .then (()=> (DisplaySimilarMoviePosters()));
 
 }
 
 function DisplaySimilarMoviePosters() {
   //loop through local storage and call DisplaySimiarMoviePosters
   for (let index = 0; index < localStorage.length; index++) {
-    console.log('localstorage:',index, " ", localStorage[index]);
+    console.log('localStorage:',index, " ", localStorage[index]);
     //this parts depends on whether you want to create images dynamically or use IDs in the HTML - but that depends on the content framework you want to use
   }
 }
