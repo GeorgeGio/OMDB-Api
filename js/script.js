@@ -21,7 +21,7 @@ movieSearchButtonEl.addEventListener("click", function () {
 
   displayMoviePoster(userMovie);
 
- // getSimilarMovies(userMovie);
+  getSimilarMovies(userMovie);
 
 //  DisplaySimilarMoviePosters();
 });
@@ -50,7 +50,8 @@ function getSimilarMovies(movie) {
         let similarMovieName = similarMovies.Similar.Results[index].Name;
         localStorage.setItem(index, similarMovieName);
       }
-    });
+    })
+    .then (()=> (DisplaySimilarMoviePosters()));
 
 }
 
