@@ -64,12 +64,14 @@ function getSimilarMovies(movie) {
   )
     .then((response) => response.json())
     .then((similarMovies) => {
+     
       localStorage.clear();
       for (let index = 0; index < 3; index++) {
         let similarMovieName = similarMovies.Similar.Results[index].Name;
         localStorage.setItem(index, similarMovieName);
       }
     });
+
 }
 
 function DisplaySimilarMoviePosters() {
