@@ -79,7 +79,7 @@ function getSimilarMovies(movie) {
       similarMoviesArr = [];
       for (let index = 0; index < 3; index++) {
         let similarMovieName = similarMovies.Similar.Results[index].Name;
-        similarMoviesArr.push();
+        similarMoviesArr.push(similarMovieName);
 
 
       }
