@@ -12,82 +12,70 @@ let similarButtonEl = document.querySelector(".simButMov");
 
 let movieSearchButtonEl = document.querySelector("#movie-search-button");
 
-
-
-
 //EventListener for MovieSearchButton
 
 movieSearchButtonEl.addEventListener("click", function () {
   userMovie = movieSearchEl.value.trim();
 
-  console.log("userMovie", userMovie);
-
+  console.log("userMovie: ", userMovie);
 
   displayMoviePoster(userMovie);
 
-
   getSimilarMovies(userMovie);
 
-
-
+  DisplaySimilarMoviePosters();
 });
-
-
-
 
 function displayMoviePoster(movie) {
   fetch(`https://www.omdbapi.com/?t=${movie}&apikey=b8054373`)
-  .then((response) => response.json())
-  //   .then(data => console.log(data));
-  .then((data) => {
-    //could condense these 2 lines into 1
-    userMoviePosterUrl = data.Poster;
-    
-    moviePosterEl.src = userMoviePosterUrl;
-    
-    let similarButton = document.body.appendChild(document.createElement("button"));
-    console.log(similarButton);
-    similarButton.textContent = "Similar movies";
-    similarButton.setAttribute("class" , "simButMov");
-    let buttonClass = document.querySelector(".simButMov");
+    .then((response) => response.json())
+    //   .then(data => console.log(data));
+    .then((data) => {
+      //could condense these 2 lines into 1
+      userMoviePosterUrl = data.Poster;
 
-    
-    buttonClass.addEventListener("click",function(){
-      console.log("works");
-      let similarMoviesString = localStorage.getItem("SimilarMovies");
-      
+      moviePosterEl.src = userMoviePosterUrl;
+
+      // let similarButton = document.body.appendChild(document.createElement("button"));
+      // console.log(similarButton);
+      // similarButton.textContent = "Similar movies";
+      // similarButton.setAttribute("class" , "simButMov");
+      // let buttonClass = document.querySelector(".simButMov");
+
+      // buttonClass.addEventListener("click",function(){
+      //   console.log("works");
+      //   let similarMoviesString = localStorage.getItem("SimilarMovies");
+
       // console.log(similarMoviesArr);
-      similarMoviesArr = JSON.parse(similarMoviesString) || [];
+      // similarMoviesArr = JSON.parse(similarMoviesString) || [];
       // console.log(similarMoviesArr);
 
+      // });
+
+      // getSimilarMovies(movie);
     });
-    
-    // getSimilarMovies(movie);
-  });
 }
 
 function getSimilarMovies(movie) {
-
-
-
-
-  // fetch("https://tastedive.com/api/similar?q=movie:matrix&k=447474-Project1-74HRK333")
-  fetch("https://tastedive.com/api/similar?q=movie:" + movie + "&k=447625-Project1-NTMYY5L9&limit=3")
-    .then(response => response.json())
-    // .then(similarMovies => console.log(similarMovies))
+  fetch(
+    "https://tastedive.com/api/similar?q=movie:" +
+      movie +
+      "&k=447625-Project1-NTMYY5L9&limit=3"
+  )
+    .then((response) => response.json())
     .then((similarMovies) => {
-      let localArray = [];
+      localStorage.clear();
       for (let index = 0; index < 3; index++) {
-        let movieIndex = similarMovies.Similar.Results[index].Name;
-        localArray.push(movieIndex);
-
-
+        let similarMovieName = similarMovies.Similar.Results[index].Name;
+        localStorage.setItem(index, similarMovieName);
       }
-      localStorage.setItem("SimilarMovies",JSON.stringify(localArray));
-
-
-    })
-
+    });
 }
 
-
+function DisplaySimilarMoviePosters() {
+  //loop through local storage and call DisplaySimiarMoviePosters
+  for (let index = 0; index < localStorage.length; index++) {
+    console.log('localstorage:',index, " ", localStorage[index]);
+    //this parts depends on whether you want to create images dynamically or use IDs in the HTML - but that depends on the content framework you want to use
+  }
+}
