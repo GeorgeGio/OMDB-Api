@@ -14,11 +14,11 @@
 - [Acknowledgments](#acknowledgments)
 
 **Note: This project makes use of CORS Unblock Extension.**
-Here is a link for one on Chrome: [Cors Unblock](https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino?hl=en) (update: not necessary as TasteDive Api ceased to work)
+Here is a link for a Chrome extension (use at own risk): [Cors Unblock](https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino?hl=en) (update: not necessary as TasteDive Api ceased to work)
 
 ## Overview
 
-The project will ask the user via a modal for a film/movie they like. From this film/movie we will display the poster of the film/movie they like using OMDBApi, then the name of 3 similar films/movies they may like from TasteDive Api and the associated posters from OMBDApi.
+The project will ask the user for a film/movie they like. From this film/movie we will display the poster of the film/movie they like using OMDBApi, then the name of 3 similar films/movies they may like from TasteDive Api and the associated posters from OMBDApi. (TasteDive went down so we used New York Times - the data is not as "similar" but the concept is the same)
 
 ### The challenge
 
@@ -54,15 +54,15 @@ You and your group will use everything you’ve learned to create a real-world f
 - Solution URL: [https://github.com/GeorgeGio/OMDB-Api](https://github.com/GeorgeGio/OMDB-Api)
 - Live Site URL: [https://georgegio.github.io/OMDB-Api/](https://georgegio.github.io/OMDB-Api/)
 
-## Out process
+## Our process
 
-We decided on our first API OMDBApi. From this we looked at what information was returned and decided how we would use that information. In this case, to the display the movie poster. We then decided that we could use TasteDive API to return movies similar to the one the user chose. But in addition to just returning those movie names we decided to return the posters for those similar movies too. 
+We decided on our first API OMDBApi. From this we looked at what information was returned and decided how we would use that information. In this case, to the display the movie poster. We then decided that we could use TasteDive API to return movies similar to the one the user chose. But in addition to just returning those movie names we decided to return the posters for those similar movies by going back to OMDB for those. 
 
-We then set up the project and start with the Kanban wall/Todos to break the task up into manageable tasks we could all tackle separately and jointly. We worked alone and using paired programming to develop and discuss the task. Supporting each other along the way. We also communicated via Slack to ensure we all knew what was going on as we worked on parts individually. We commented out code and chose meaningful variable names to give our project good readability. We fixed any bugs as a team before moving on. We created separate branches as per the todos. And we checked/merged our code regularly. 
+We then set up the project and start with the Kanban wall/Todos to break the task up into manageable tasks we could all tackle separately and jointly. We worked alone and using paired programming to develop and discuss the task. Supporting each other along the way. We also communicated via Slack to ensure we all knew what was going on as we worked on parts individually. We commented our code and chose meaningful variable names to give our project good readability. We fixed any bugs as a team before moving on. We created separate branches as per the todos/issues. And we checked/merged our code regularly. 
 
 We decided to get the project working with a temporary basic html page before deciding on the css framework as it wasn't clear from the brief whether we should use Bootstrap or not (the readme said Use Bootstrap and rubric said we shouldn't)
 
-We looked at tailwind but due to TasteDive going down we didn't get the time / chance to implement Tailwind. And so we had a last minute struggle to find another API and get that working. We ended up with New York Times and 3 movies but the results aren't as good as TasteDive. We used Bootstrap instead
+We looked at tailwind but due to TasteDive going down we didn't get the time / chance to implement Tailwind. And so we had a last minute struggle to find another API and get that working. We ended up with New York Times api and 3 movies but the results aren't as good as TasteDive. Because of a lack of time and also clarification We used Bootstrap instead of tailwind.
 
 ### Built with
 
@@ -110,7 +110,7 @@ function DisplaySimilarMoviePosters() {
 
 ### Continued development
 
-We could check that the movie entered exists and if not, tell the user to check their entry and try again. Check if there is a poster and if not use a default image. Add movie reviews (the function is in progress.). Allow the user to click on a poster to then give the next set of results and so on. 
+We could check that the movie entered exists and if not, tell the user to check their entry and try again. Check if there is a poster and if not use a default image. Add movie reviews (the function is in progress.). Allow the user to click on a poster to then give the next set of results and so on. We also use Tailwind for a nice/more responsive UI. 
 
 
 ### Useful resources
