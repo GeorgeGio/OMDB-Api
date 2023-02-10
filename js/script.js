@@ -3,13 +3,12 @@ let userMovie = "";
 let userMoviePosterUrl = "";
 let similarMoviesArr = [];
 let similarMoviePosterUrl = [];
+//number of similar movies to show
 let similarMoviesToShow = 3;
-
 
 let movieSearchEl = document.querySelector("#movie-search");
 let moviePosterEl = document.querySelector("#movie-poster");
 let similarButtonEl = document.querySelector(".simButMov");
-
 
 let movieSearchButtonEl = document.querySelector("#movie-search-button");
 
@@ -21,7 +20,6 @@ let movieReviewerEl = document.querySelector(".movie-reviewer");
 movieSearchButtonEl.addEventListener("click", function () {
   userMovie = movieSearchEl.value.trim();
 
-  console.log("userMovie: ", userMovie);
 
   displayMoviePoster(userMovie);
   newYorkReview(userMovie);
@@ -38,34 +36,36 @@ function displayMoviePoster(movie) {
       userMoviePosterUrl = data.Poster;
 
       moviePosterEl.src = userMoviePosterUrl;
-
     });
 }
 
 function newYorkReview(movie) {
-  fetch(`https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=${movie}&api-key=MssSerOq7vOA5WVLlEYMeraNlBWUPlpN`)
-  .then((response) => response.json())
-  .then((newYorkTimesData) => {
-    console.log(newYorkTimesData.results);
-    for (let i = 0; i < newYorkTimesData.results.length; i++) {
-      if(newYorkTimesData.results[i].display_title === movie){
+  fetch(
+    `https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=${movie}&api-key=MssSerOq7vOA5WVLlEYMeraNlBWUPlpN`
+  )
+    .then((response) => response.json())
+    .then((newYorkTimesData) => {
+      for (let i = 0; i < similarMoviesToShow; i++) {
+        //this if statement is never true so i commented it out
+        //   if(newYorkTimesData.results[i].display_title === movie){
 
-      
-        console.log(newYorkTimesData.results[i].display_title)
-        console.log(newYorkTimesData.results[i].summary_short)
-        let reviewMovie = newYorkTimesData.results[i].summary_short;
-        movieReviewEl.textContent = `"${reviewMovie}"`
-        let reviewerMovie = newYorkTimesData.results[i].byline;
-        movieReviewerEl.textContent = reviewerMovie;
-      };
-    }
-    // let reviewMovie = newYorkTimesData.results[1].summary_short;
-    // console.log(reviewMovie);
+        let similarMovieName = newYorkTimesData.results[i].display_title;
+        localStorage.setItem(i, similarMovieName);
 
-    // 
-    
-  });
-  
+
+        //not sure if you wanted to display reviews...but i've commented this out
+        // let reviewMovie = newYorkTimesData.results[i].summary_short;
+        // movieReviewEl.textContent = `"${reviewMovie}"`;
+        // let reviewerMovie = newYorkTimesData.results[i].byline;
+        // movieReviewerEl.textContent = reviewerMovie;
+        //   };
+      }
+      // let reviewMovie = newYorkTimesData.results[1].summary_short;
+      // console.log(reviewMovie);
+
+      //
+    })
+    .then(() => FetchSimilarMoviePosters());
 }
 
 // function getSimilarMovies(movie) {
@@ -86,23 +86,25 @@ function newYorkReview(movie) {
 
 // }
 
+function FetchSimilarMoviePosters() {
+  //loop through local storage, storage urls is array and call DisplaySimilarMoviePosters
+  for (let index = 0; index < localStorage.length; index++) {
+  //  console.log("localStorage:", index, " ", localStorage[index]);
 
-// function DisplaySimilarMoviePosters() {
-//   //loop through local storage and call DisplaySimiarMoviePosters
-//   for (let index = 0; index < localStorage.length; index++) {
-//     console.log("localStorage:", index, " ", localStorage[index]);
+    fetch(`https://www.omdbapi.com/?t=${localStorage[index]}&apikey=b8054373`)
+      .then((response) => response.json())
+      .then((data) => {
+        similarMoviePosterUrl[index] = data.Poster;
+      })
+      .then(() => DisplaySimilarMoviePosters());
+  }
+}
+function DisplaySimilarMoviePosters() {
+  for (let index = 0; index < localStorage.length; index++) {
+    let similarMoviePosterEl = document.querySelector(
+      `#similar-movie-poster-${index}`
+    );
 
-//     fetch(`https://www.omdbapi.com/?t=${localStorage[index]}&apikey=b8054373`)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         let counterSim = similarMoviePosterUrl[index];
-//         counterSim = data.Poster;
-//         console.log(counterSim);
-
-//         let similarMoviePosterEl = document.querySelector(`#similar-movie-poster-${index}`);
-
-//         similarMoviePosterEl.src = counterSim;
-//       });
-//     //this parts depends on whether you want to create images dynamically or use IDs in the HTML - but that depends on the content framework you want to use
-//   }
-// }
+    similarMoviePosterEl.src = similarMoviePosterUrl[index];
+  }
+}
