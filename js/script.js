@@ -89,7 +89,7 @@ function newYorkReview(movie) {
 function FetchSimilarMoviePosters() {
   //loop through local storage, storage urls is array and call DisplaySimilarMoviePosters
   for (let index = 0; index < localStorage.length; index++) {
-  //  console.log("localStorage:", index, " ", localStorage[index]);
+   
 
     fetch(`https://www.omdbapi.com/?t=${localStorage[index]}&apikey=b8054373`)
       .then((response) => response.json())
