@@ -1,10 +1,71 @@
 #movie-poster{
 
     height: 400px;
-    /* width:400px;     */
+        /* width:400px;     */
 }
 
 #similar-movies-section{
     display: flex;
-    height: 100px;
+    height: 400px;
+}
+
+.title {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    background-color: black;
+    color:white;
+    padding-block: 1%;
+}
+
+.input-group {
+    display:flex;
+   text-align: center;
+   justify-content: center;
+}
+
+#movie-search{
+    width:30%;
+    
+}
+
+#movie-search-button {
+    justify-content: center;
+    background-color: #0914ed;
+    border: none;
+    color: white;
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    padding-block:1%;
+}
+
+.search{
+    display:flex;
+    justify-content: center;
+    padding-block: 1%;
+    
+}
+.user-movie{
+    display:flex;
+    justify-content: center;
+}
+
+.similar-movie-posters{
+    display:flex;
+    justify-content: center;
+}
+
+.sim-posters {
+padding-inline: 10px;
+}
+
+#sim-movies {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    background-color: black;
+    color:white;
+    padding-block: 1%;
 }
