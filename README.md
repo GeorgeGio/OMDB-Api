@@ -14,7 +14,7 @@
 - [Acknowledgments](#acknowledgments)
 
 **Note: This project makes use of CORS Unblock Extension.**
-Here is a link for one on Chrome: [Cors Unblock](https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino?hl=en)
+Here is a link for one on Chrome: [Cors Unblock](https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino?hl=en) (update: not necessary as TasteDive Api ceased to work)
 
 ## Overview
 
@@ -47,20 +47,22 @@ You and your group will use everything you’ve learned to create a real-world f
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./screenshots/Screenshot1.png)
 
 ### Links
 
 - Solution URL: [https://github.com/GeorgeGio/OMDB-Api](https://github.com/GeorgeGio/OMDB-Api)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [https://georgegio.github.io/OMDB-Api/](https://georgegio.github.io/OMDB-Api/)
 
-## My process
+## Out process
 
 We decided on our first API OMDBApi. From this we looked at what information was returned and decided how we would use that information. In this case, to the display the movie poster. We then decided that we could use TasteDive API to return movies similar to the one the user chose. But in addition to just returning those movie names we decided to return the posters for those similar movies too. 
 
 We then set up the project and start with the Kanban wall/Todos to break the task up into manageable tasks we could all tackle separately and jointly. We worked alone and using paired programming to develop and discuss the task. Supporting each other along the way. We also communicated via Slack to ensure we all knew what was going on as we worked on parts individually. We commented out code and chose meaningful variable names to give our project good readability. We fixed any bugs as a team before moving on. We created separate branches as per the todos. And we checked/merged our code regularly. 
 
 We decided to get the project working with a temporary basic html page before deciding on the css framework as it wasn't clear from the brief whether we should use Bootstrap or not (the readme said Use Bootstrap and rubric said we shouldn't)
+
+We looked at tailwind but due to TasteDive going down we didn't get the time / chance to implement Tailwind. And so we had a last minute struggle to find another API and get that working. We ended up with New York Times and 3 movies but the results aren't as good as TasteDive.
 
 ### Built with
 
@@ -71,41 +73,53 @@ We decided to get the project working with a temporary basic html page before de
 - Mobile-first workflow
 - Figma
 - GitHub
+- Bootstrap
 
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+How to control the timing and sequencing of functions using .then
 
-To see how you can add code snippets, see below:
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
 
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
 
 ```js
-const proudOfThisFunc = () => {
-  console.log("🎉");
-};
+function FetchSimilarMoviePosters() {
+  //loop through local storage, storage urls is array and call DisplaySimilarMoviePosters
+  for (let index = 0; index < localStorage.length; index++) {
+  //  console.log("localStorage:", index, " ", localStorage[index]);
+
+    fetch(`https://www.omdbapi.com/?t=${localStorage[index]}&apikey=b8054373`)
+      .then((response) => response.json())
+      .then((data) => {
+        similarMoviePosterUrl[index] = data.Poster;
+      })
+      .then(() => DisplaySimilarMoviePosters());
+  }
+}
+function DisplaySimilarMoviePosters() {
+  for (let index = 0; index < localStorage.length; index++) {
+    let similarMoviePosterEl = document.querySelector(
+      `#similar-movie-poster-${index}`
+    );
+
+    similarMoviePosterEl.src = similarMoviePosterUrl[index];
+  }
+}
+
 ```
 
 
 ### Continued development
 
-We could check that the movie entered exists and if not, tell the user to check their entry and try again.
+We could check that the movie entered exists and if not, tell the user to check their entry and try again. Check if there is a poster and if not use a default image. 
 
 
 ### Useful resources
 
 - [TasteDive API](https://tastedive.com/read/api) - This helped us choose and use the TasteDive Api for getting similar movies to the user chosen movie.
 - [OMDB API](https://www.omdbapi.com/) - The documenation here helped us utilise the movie database for our project to return the movie poster associated with the respective movie.
-
+- [New York Time Movie Api] (https://developer.nytimes.com/docs/movie-reviews-api/1/overview) - This was useful for last minute replacement of TasteDive Api. It allowed us to repurpose our project to some extent. 
 
 ## Authors
 
@@ -122,5 +136,6 @@ Ian Logendra
 
 ## Acknowledgments
 
-- Jonathon (TA) - helped us choose our content framework and 2 APIs.
+- Jonathon (TA) - helped us choose our content framework and 2 APIs. He also explained how to utilise .then for controlling the sequencing and timing of function.
+- Dane and Andrew - as always. Very good instructor.s 
 
